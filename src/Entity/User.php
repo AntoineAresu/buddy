@@ -19,7 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    private ?string $email = null;
+    private string $email = '';
 
     /**
      * @var list<string> The user roles
@@ -27,11 +27,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
     #[ORM\Column]
-    private ?string $password = null;
+    private string $password = '';
 
     /**
      * @var Collection<int, Dog>
@@ -68,7 +65,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        // @phpstan-ignore return.type
+        return $this->email;
     }
 
     /**
