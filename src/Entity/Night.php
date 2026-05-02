@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\NightRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: NightRepository::class)]
+class Night
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column]
+    private ?\DateTime $end = null;
+
+    #[ORM\Column]
+    private ?\DateTime $start = null;
+
+    #[ORM\ManyToOne(inversedBy: 'nights')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Dog $dog = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getEnd(): ?\DateTime
+    {
+        return $this->end;
+    }
+
+    public function setEnd(\DateTime $end): static
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    public function getStart(): ?\DateTime
+    {
+        return $this->start;
+    }
+
+    public function setStart(\DateTime $start): static
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    public function getDog(): ?Dog
+    {
+        return $this->dog;
+    }
+
+    public function setDog(?Dog $dog): static
+    {
+        $this->dog = $dog;
+
+        return $this;
+    }
+}
