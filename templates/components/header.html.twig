@@ -17,4 +17,7 @@
             </li>
         </ul>
     </div>
+    {% if app.user %}
+        <a class="nav-link text-white mx-4" href="{{ path('app_logout') }}">Logout</a>
+    {% endif %}
 </nav>
