@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\NightRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NightRepository::class)]
 class Night
@@ -14,9 +15,13 @@ class Night
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\DateTime]
     private ?\DateTime $end = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\DateTime]
     private ?\DateTime $start = null;
 
     #[ORM\ManyToOne(inversedBy: 'nights')]

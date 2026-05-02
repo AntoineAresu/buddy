@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DogRepository::class)]
 class Dog
@@ -20,6 +21,7 @@ class Dog
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\DateTime]
     private ?\DateTime $birthDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'dogs')]

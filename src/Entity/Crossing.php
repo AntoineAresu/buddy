@@ -7,6 +7,7 @@ use App\Entity\Enum\Location;
 use App\Entity\Enum\ReactionLevel;
 use App\Repository\CrossingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CrossingRepository::class)]
 class Crossing
@@ -20,12 +21,15 @@ class Crossing
     private ?int $distance = null;
 
     #[ORM\Column(enumType: Location::class)]
+    #[Assert\NotBlank]
     private ?Location $location = null;
 
     #[ORM\Column(enumType: FreedomLevel::class)]
+    #[Assert\NotBlank]
     private ?FreedomLevel $freedomLevel = null;
 
     #[ORM\Column(nullable: true, enumType: ReactionLevel::class)]
+    #[Assert\NotBlank]
     private ?ReactionLevel $reaction = null;
 
     #[ORM\ManyToOne(inversedBy: 'crossings')]
