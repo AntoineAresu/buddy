@@ -1,1 +1,4 @@
 app_name: BuddyApp
+email: Email
+login: Connexion
+password: Mot de passe
