@@ -8,3 +8,7 @@ $light: #F5F4F0;
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
 @import './font';
+
+body {
+    padding-top: 88px;
+}
