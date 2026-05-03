@@ -146,4 +146,20 @@ class Dog
 
         return $this;
     }
+
+    private function getTotalSleepInHours(): float
+    {
+        return array_reduce(
+            $this->nights->toArray(),
+            fn (float $carry, Night $night) => $carry + $night->getDurationInHours(),
+            0.0
+        );
+    }
+
+    public function getAverageSleep(): float
+    {
+        return $this->nights->isEmpty()
+            ? 0
+            : round($this->getTotalSleepInHours() / $this->nights->count(), 1);
+    }
 }

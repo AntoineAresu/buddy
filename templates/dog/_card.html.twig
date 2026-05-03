@@ -1,0 +1,38 @@
+<div class="card border-0 rounded-4 h-100 p-3 shadow-sm">
+    <div class="card-body d-flex flex-column">
+        <div class="d-flex align-items-center mb-3">
+            <div class="rounded-circle bg-secondary p-2 me-2">
+                <twig:ux:icon name="mdi:dog" class="fs-3"/>
+            </div>
+            <div>
+                <p class="mb-0">{{ dog.name }}</p>
+                <p class="text-dark font-size-secondary mb-0">
+                    {{ 'birth_at'|trans }} {{ dog.birthDate|date('d/m/Y') }}
+                </p>
+            </div>
+        </div>
+        <hr class="my-0">
+        <div class="row text-center py-3 text-dark">
+            <div class="col">
+                <p class="mb-0">{{ dog.nights|length }}</p>
+                <p class="mb-0 font-size-secondary">{{ 'nights'|trans|lower }}</p>
+            </div>
+            <div class="col">
+                <p class="mb-0">{{ dog.crossings|length }}</p>
+                <p class="mb-0 font-size-secondary">{{ 'crossings'|trans|lower }}</p>
+            </div>
+            <div class="col">
+                <p class="mb-0">{{ dog.averageSleep }}h</p>
+                <p class="mb-0 font-size-secondary">{{ 'average_sleep'|trans|lower }}</p>
+            </div>
+        </div>
+        <hr class="my-0">
+        <div class="d-flex pt-3">
+            <a href="#"
+               class="btn btn-sm btn-primary flex-fill"
+            >
+                {{ 'update'|trans }}
+            </a>
+        </div>
+    </div>
+</div>

@@ -68,4 +68,12 @@ class Night
 
         return $this;
     }
+
+    public function getDurationInHours(): float
+    {
+        return round(
+            ($this->end?->getTimestamp() - $this->start?->getTimestamp()) / 3600,
+            1
+        );
+    }
 }
