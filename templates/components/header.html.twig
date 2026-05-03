@@ -1,25 +1,31 @@
+{% set user = app.user %}
 <nav class="navbar navbar-expand-lg fixed-top bg-dark p-4">
     <span class="navbar-brand text-white m-0">
         <twig:ux:icon name="mdi:paw" class="fs-1"/>
+        {% if not user %}
+            <span class="ms-3">
+                {{ 'app_name'|trans }}
+            </span>
+        {% endif %}
     </span>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    {% if user %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link text-white mx-4" href="#">Mes chiens</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white mx-4" href="#">Mon Calendrier</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white mx-4" href="#">Statistiques</a>
-            </li>
-        </ul>
-    </div>
-    {% if app.user %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white mx-4" href="{{ path('list_dogs') }}">{{ 'my_dogs'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white mx-4" href="#">Mon calendrier</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white mx-4" href="#">Statistiques</a>
+                </li>
+            </ul>
+        </div>
         <a class="nav-link text-white mx-4" href="{{ path('app_logout') }}">Logout</a>
     {% endif %}
 </nav>
