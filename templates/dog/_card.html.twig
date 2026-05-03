@@ -7,7 +7,7 @@
             <div>
                 <p class="mb-0">{{ dog.name }}</p>
                 <p class="text-dark font-size-secondary mb-0">
-                    Né le {{ dog.birthDate|date('d/m/Y') }}
+                    {{ 'birth_at'|trans }} {{ dog.birthDate|date('d/m/Y') }}
                 </p>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <p class="mb-0 font-size-secondary">{{ 'crossings'|trans|lower }}</p>
             </div>
             <div class="col">
-                <p class="mb-0">0h</p>
+                <p class="mb-0">{{ dog.averageSleep }}h</p>
                 <p class="mb-0 font-size-secondary">{{ 'average_sleep'|trans|lower }}</p>
             </div>
         </div>

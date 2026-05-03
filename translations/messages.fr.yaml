@@ -1,6 +1,7 @@
 add_dog: Ajouter un chien
 app_name: BuddyApp
 average_sleep: Moy. sommeil
+birth_at: Né le
 crossings: Croisements
 email: Email
 login: Connexion
