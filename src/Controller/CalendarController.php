@@ -13,7 +13,7 @@ final class CalendarController extends AbstractController
     public function calendar(): Response
     {
         return $this->render('calendar/show.html.twig', [
-            'dog' => $this->getUser()->getDogs()->first(),
+            'dog' => $this->getUser()?->getDogs()->first(),
         ]);
     }
 }
