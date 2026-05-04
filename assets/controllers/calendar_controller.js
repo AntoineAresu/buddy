@@ -8,8 +8,7 @@ import interaction from 'https://cdn.skypack.dev/@fullcalendar/interaction@6.1.1
 export default class extends Controller {
     static values = {nights: Array};
     connect() {
-        let calendarEl = this.element;
-        let calendar = new Calendar(calendarEl, {
+        let calendar = new Calendar(this.element, {
             plugins: [dayGridPlugin, timeGridPlugin, interaction],
             initialView: 'dayGridMonth',
             locale: 'fr',
@@ -29,7 +28,23 @@ export default class extends Controller {
             dayHeaderFormat: { weekday: 'long' },
             editable: true,
             disableDragging: true,
+            events: this.formatNightsEvents(this.nightsValue),
         });
         calendar.render();
+    }
+
+    formatNightsEvents(nights) {
+        return nights.map(night => ({
+            start: night.end,
+            title: `🌙 Nuit du ${this.getDayOfMonth(night.start)} au ${this.getDayOfMonth(night.end)} : ${night.duration}h`,
+            allDay: true,
+            backgroundColor: '#B8CDE0',
+            borderColor: '#9BBFD4',
+            textColor: '#1e272e',
+        }));
+    }
+
+    getDayOfMonth(date) {
+        return new Date(date).getDate();
     }
 }
