@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'dashboard'|trans }}{% endblock %}
+
+{% block body %}
+    {% set yesterday = 'yesterday'|date('Y-m-d') %}
+    {% set yesterdayNight = dog.yesterdayNight %}
+
+    <div class="row g-3 mb-4 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 rounded-4 shadow-sm h-100">
+                <div class="card-body text-dark" >
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-0">{{ 'night_of'|trans }} {{ yesterday|date('d-m-Y') }}</h4>
+                            <p class="mb-0 font-size-secondary">
+                                {{ yesterdayNight
+                                ? yesterdayNight.start|date('H:i')~' → '~yesterdayNight.end|date('H:i')
+                                : 'fill_up_today'|trans }}
+                            </p>
+                        </div>
+                        <div class="rounded-2 d-flex align-items-center justify-content-center">
+                            <twig:ux:icon name="mdi:moon-waxing-crescent" class="fs-3 text-dark"/>
+                        </div>
+                    </div>
+
+                    {% if yesterdayNight %}
+                        <p>{{ 'duration'|trans }} : {{ yesterdayNight.durationInHours }}h</p>
+                        <a href="#"
+                           class="btn btn-dark w-100 mt-2"
+                        >
+                            <twig:ux:icon name="mdi:pencil" />
+                            {{ 'update'|trans }}
+                        </a>
+                    {% else %}
+                        <a href="#"
+                           class="btn btn-dark w-100 mt-2"
+                        >
+                            <twig:ux:icon name="mdi:plus" />
+                            {{ 'fill_up'|trans }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
