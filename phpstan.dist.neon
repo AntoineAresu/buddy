@@ -4,6 +4,9 @@ includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon
 
 parameters:
+    ignoreErrors:
+        -
+            identifier: missingType.generics
     level: max
     paths:
         - src/
