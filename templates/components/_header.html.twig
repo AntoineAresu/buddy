@@ -13,22 +13,19 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        {% set nav_items = [
-            { label: 'my_dogs'|trans, path: path('list_dogs'), route_name: 'list_dogs' },
-            { label: 'statistics'|trans, path: '#', route_name: '' },
-        ] %}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                {% for nav_item in nav_items %}
+                {% if 'list_dogs' != route_name %}
                     <li class="nav-item">
                         <a
-                            class="nav-link text-white mx-4 {{ nav_item.route_name == route_name ? 'active' : ''}}"
-                            href="{{ nav_item.path }}"
+                            class="nav-link text-white mx-4"
+                            href="{{ path('list_dogs') }}"
                         >
-                            {{ nav_item.label }}
+                            <twig:ux:icon name="mdi:chevron-left" class="fs-3"/>
+                            {{ 'my_dogs'|trans }}
                         </a>
                     </li>
-                {% endfor %}
+                {% endif %}
             </ul>
         </div>
         <a class="nav-link text-white mx-4" href="{{ path('app_logout') }}">Logout</a>
