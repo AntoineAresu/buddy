@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'calendar'|trans }}{% endblock %}
+
+{% block body %}
+    <div {{ stimulus_controller('calendar', {nights: dog.nightsToArray}) }}>
+
+    </div>
+{% endblock %}

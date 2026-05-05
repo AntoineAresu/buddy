@@ -13,23 +13,23 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+        {% set nav_items = [
+            { label: 'my_dogs'|trans, path: path('list_dogs'), route_name: 'list_dogs' },
+            { label: 'calendar'|trans, path: path('show_calendar'), route_name: 'show_calendar' },
+            { label: 'statistics'|trans, path: '#', route_name: '' },
+        ] %}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a
-                        class="nav-link text-white mx-4 {{ 'list_dogs' == route_name ? 'active' : ''}}"
-                        href="{{ path('list_dogs') }}"
-                    >
-                        {{ 'my_dogs'|trans }}
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-4" href="#">Calendrier</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white mx-4" href="#">Statistiques</a>
-                </li>
+                {% for nav_item in nav_items %}
+                    <li class="nav-item">
+                        <a
+                            class="nav-link text-white mx-4 {{ nav_item.route_name == route_name ? 'active' : ''}}"
+                            href="{{ nav_item.path }}"
+                        >
+                            {{ nav_item.label }}
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
         <a class="nav-link text-white mx-4" href="{{ path('app_logout') }}">Logout</a>

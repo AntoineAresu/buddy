@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block title %}{{ 'my_dogs'|trans }}{% endblock %}
 {% block body %}
-    <div class="container py-4 mt-3">
-        <div class="row">
-            {% for dog in dogs %}
-                <div class="col-12 col-md-6 col-lg-4">
-                    {{ include('dog/_card.html.twig', {dog}) }}
-                </div>
-            {% endfor %}
-        {{ include('dog/_add_button.html.twig') }}
-        </div>
+    <div class="row">
+        {% for dog in dogs %}
+            <div class="col-12 col-md-6 col-lg-4">
+                {{ include('dog/_card.html.twig', {dog}) }}
+            </div>
+        {% endfor %}
+    {{ include('dog/_add_button.html.twig') }}
     </div>
 {% endblock %}
