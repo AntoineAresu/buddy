@@ -17,11 +17,11 @@ final class NightController extends AbstractController
     #[IsGranted('UPDATE', 'dog')]
     public function create(Request $request, Dog $dog, EntityManagerInterface $em): Response
     {
-        $night = new Night();
+        $night = new Night()->setDog($dog);
         $form = $this->createForm(NightType::class, $night)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $dog->addNight($night);
+            $em->persist($night);
             $em->flush();
 
             return $this->redirectToRoute('show_dashboard', ['id' => $dog->getId()]);
