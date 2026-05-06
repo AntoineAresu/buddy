@@ -31,7 +31,7 @@ class Dog
     /**
      * @var Collection<int, Night>
      */
-    #[ORM\OneToMany(targetEntity: Night::class, mappedBy: 'dog', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Night::class, mappedBy: 'dog', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $nights;
 
     /**
