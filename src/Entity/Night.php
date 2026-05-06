@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\NightRepository;
+use App\Validator\Constraints as CustomAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NightRepository::class)]
+#[CustomAssert\NightDateConsistency]
 class Night
 {
+    final public const int MAX_DURATION_HOURS = 15;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
