@@ -16,17 +16,22 @@ class Night
 
     #[ORM\Column]
     #[Assert\NotNull]
-    #[Assert\DateTime]
     private ?\DateTime $end = null;
 
     #[ORM\Column]
     #[Assert\NotNull]
-    #[Assert\DateTime]
+    #[Assert\LessThan(propertyPath: 'end')]
     private ?\DateTime $start = null;
 
     #[ORM\ManyToOne(inversedBy: 'nights')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Dog $dog = null;
+
+    public function __construct()
+    {
+        $this->start = new \DateTime('yesterday')->setTime(22, 0);
+        $this->end = new \DateTime('today')->setTime(8, 0);
+    }
 
     public function getId(): ?int
     {

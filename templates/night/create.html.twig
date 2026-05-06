@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ 'dashboard'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="row g-3 mb-4 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card border-0 rounded-4 shadow-sm h-100">
+                <div class="card-body text-dark" >
+                    <h5 class="card-title text-center mb-4">
+                        Renseigner la nuit du {{ 'yesterday'|date('d/m/Y')|trans }}
+                    </h5>
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button
+                        type="submit"
+                        class="btn btn-dark w-100 mt-4 border-2"
+                    >
+                        <twig:ux:icon name="mdi:check" />
+                        {{ 'submit'|trans }}
+                    </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

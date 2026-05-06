@@ -7,13 +7,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-final class CalendarController extends AbstractController
+final class DashboardController extends AbstractController
 {
-    #[Route('/dog/{id<\d+>}/calendar', name: 'show_calendar')]
+    #[Route('/dog/{id<\d+>}/dashboard', name: 'show_dashboard')]
     #[IsGranted('UPDATE', 'dog')]
     public function calendar(Dog $dog): Response
     {
-        return $this->render('calendar/show.html.twig', [
+        return $this->render('dashboard/show.html.twig', [
             'dog' => $dog,
         ]);
     }

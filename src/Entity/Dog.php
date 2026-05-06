@@ -31,7 +31,7 @@ class Dog
     /**
      * @var Collection<int, Night>
      */
-    #[ORM\OneToMany(targetEntity: Night::class, mappedBy: 'dog', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Night::class, mappedBy: 'dog', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $nights;
 
     /**
@@ -173,5 +173,18 @@ class Dog
             'duration' => $night->getDurationInHours(),
             'end' => $night->getEnd()?->format('Y-m-d H:i:s'),
         ])->toArray();
+    }
+
+    public function getYesterdayNight(): ?Night
+    {
+        $yesterday = new \DateTime('yesterday');
+
+        foreach ($this->nights as $night) {
+            if ($night->getStart()?->format('Y-m-d') === $yesterday->format('Y-m-d')) {
+                return $night;
+            }
+        }
+
+        return null;
     }
 }
