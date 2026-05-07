@@ -9,6 +9,7 @@ duration: Durée
 email: Email
 end: Fin
 fill_up: Renseigner
+fill_up_night_of: Renseigner la nuit du %date%
 fill_up_today: À renseigner aujourd'hui
 login: Connexion
 my_dogs: Mes chiens
@@ -19,3 +20,4 @@ start: Début
 statistics: Statistiques
 submit: Valider
 update: Modifier
+update_night_of: Modifier la nuit du %date%

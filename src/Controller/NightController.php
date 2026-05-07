@@ -31,4 +31,21 @@ final class NightController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/night/{id<\d+>}/update', name: 'update_night')]
+    #[IsGranted('UPDATE', 'night')]
+    public function update(Request $request, Night $night, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(NightType::class, $night)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('show_dashboard', ['id' => $night->getDog()->getId()]);
+        }
+
+        return $this->render('night/create.html.twig', [
+            'form' => $form,
+        ]);
+    }
 }
