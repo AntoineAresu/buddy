@@ -7,8 +7,8 @@ use App\Entity\Night;
 use App\Validator\Constraints\NightDateConsistency;
 use App\Validator\Constraints\NightDateConsistencyValidator;
 use PHPUnit\Framework\Attributes\DataProvider;
-use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
+use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class NightDateConsistencyValidatorTest extends ConstraintValidatorTestCase
 {
@@ -36,9 +36,8 @@ class NightDateConsistencyValidatorTest extends ConstraintValidatorTestCase
         $dog->addNight($newNight);
 
         $this->validator->validate($newNight, new NightDateConsistency());
-
         $violation = $this->buildViolation('night_already_exists_for_day');
-        var_dump($this->context->getViolations());
+
         $shouldRaiseViolation ? $violation->assertRaised() : $this->assertNoViolation();
     }
 
@@ -51,5 +50,44 @@ class NightDateConsistencyValidatorTest extends ConstraintValidatorTestCase
 
         yield 'Should raise violation with nights on same day' => [true, $yesterdayEvening, $todayMorning, $yesterdayEvening, $todayMorning];
         yield 'Should not raise violation with nights on different days' => [false, $yesterdayMinusTwoDayEvening, $yesterdayMinusOneDayMorning, $yesterdayEvening, $todayMorning];
+    }
+
+    #[DataProvider('provideTestNightDuration')]
+    public function testNightDuration(bool $shouldRaiseViolation, \DateTime $start, \DateTime $end): void
+    {
+        $night = new Night()
+            ->setStart($start)
+            ->setEnd($end);
+
+        $this->validator->validate($night, new NightDateConsistency());
+
+        if ($shouldRaiseViolation) {
+            $violation = $this->buildViolation('night_duration_too_long')
+                ->setParameter('%hour%', Night::MAX_DURATION_HOURS);
+
+            var_dump($this->context->getViolations());
+            $violation->assertRaised();
+        } else {
+            $this->assertNoViolation();
+        }
+    }
+
+    public static function provideTestNightDuration(): \Generator
+    {
+        yield 'Should raise violation with duration greater than 15 hours' => [
+            true,
+            new \DateTime('yesterday')->setTime(20, 00),
+            new \DateTime()->setTime(12, 00),
+        ];
+        yield 'Should not raise violation with duration same as 15 hours' => [
+            false,
+            new \DateTime('yesterday')->setTime(20, 00),
+            new \DateTime()->setTime(8, 00),
+        ];
+        yield 'Should not raise violation with duration lesser than 15 hours' => [
+            false,
+            new \DateTime('yesterday')->setTime(20, 00),
+            new \DateTime()->setTime(7, 00),
+        ];
     }
 }
