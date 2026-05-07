@@ -32,7 +32,7 @@
                             {{ 'update'|trans }}
                         </a>
                     {% else %}
-                        <a href="#"
+                        <a href="{{ path('create_night', {id: dog.id}) }}"
                            class="btn btn-dark w-100 mt-2"
                         >
                             <twig:ux:icon name="mdi:plus" />
