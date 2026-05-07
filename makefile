@@ -1,12 +1,24 @@
 .PHONY: ci audit cs stan
 
-ci: audit cs stan
+PHPUNIT       = $(BIN)/simple-phpunit
+BIN    	      = ./vendor/bin
+PHP_CS_FIXER  = $(BIN)/php-cs-fixer
+PHPSTAN       = $(BIN)/phpstan
+PHPUNIT       = $(PHP) $(BIN)/phpunit
+PHP           = php
+
+
+ci: audit cs stan tests
+tests: run_tests
 
 audit:
 	composer audit
 
 cs:
-	vendor/bin/php-cs-fixer fix -v
+	$(PHP_CS_FIXER) fix -v
 
 stan:
-	vendor/bin/phpstan analyse src --level=max
+	$(PHPSTAN) analyse src --level=max
+
+run_tests:
+	@$(PHPUNIT) tests
