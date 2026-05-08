@@ -24,7 +24,7 @@ final class CalendarController extends AbstractController
     #[IsGranted('UPDATE', 'dog')]
     public function today(Dog $dog, ?\DateTime $date, NightRepository $nightRepository, CrossingRepository $crossingRepository): Response
     {
-        $date = $date ?? new \DateTime();
+        $date = $date ?? new \DateTime()->setTime(0, 0);
 
         return $this->render('calendar/day.html.twig', [
             'dog' => $dog,

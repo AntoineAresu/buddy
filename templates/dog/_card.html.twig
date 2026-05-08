@@ -28,7 +28,7 @@
         </div>
         <hr class="my-0">
         <div class="d-flex flex-column gap-2 pt-3">
-            <a href="{{ path('show_calendar_day', {id: dog.id}) }}" class="btn btn btn-dark w-100">{{ 'today'|trans }}</a>
+            <a href="{{ path('show_calendar_day', {id: dog.id, date: 'today'|date('Y-m-d')}) }}" class="btn btn btn-dark w-100">{{ 'today'|trans }}</a>
             <div class="d-flex gap-2">
                 <a href="{{ path('show_calendar', {id: dog.id}) }}" class="btn btn btn-info flex-fill">{{ 'calendar'|trans }}</a>
                 <a href="#" class="btn btn btn-warning flex-fill">{{ 'statistics'|trans }}</a>
