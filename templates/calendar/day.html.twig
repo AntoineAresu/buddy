@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ 'dashboard'|trans }}{% endblock %}
+{% block title %}{{ 'today'|trans }}{% endblock %}
 
 {% block body %}
-    {% set yesterday = 'yesterday'|date('Y-m-d') %}
+    {% set yesterday = date|date_modify('-1 day')|date('Y-m-d') %}
     {% set yesterdayNight = dog.yesterdayNight %}
 
     <div class="row g-3 mb-4 justify-content-center">

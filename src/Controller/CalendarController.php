@@ -17,4 +17,16 @@ final class CalendarController extends AbstractController
             'dog' => $dog,
         ]);
     }
+
+    #[Route('/dog/{id<\d+>}/calendar/day/{date<\d{4}-\d{2}-\d{2}>}', name: 'show_calendar_day', defaults: ['date' => null])]
+    #[IsGranted('UPDATE', 'dog')]
+    public function today(Dog $dog, ?\DateTimeInterface $date): Response
+    {
+        $date = $date ?? new \DateTime();
+
+        return $this->render('calendar/day.html.twig', [
+            'dog' => $dog,
+            'date' => $date,
+        ]);
+    }
 }

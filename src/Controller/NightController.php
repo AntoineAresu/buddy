@@ -24,7 +24,7 @@ final class NightController extends AbstractController
             $em->persist($night);
             $em->flush();
 
-            return $this->redirectToRoute('show_dashboard', ['id' => $dog->getId()]);
+            return $this->redirectToRoute('show_calendar_day', ['id' => $dog->getId()]);
         }
 
         return $this->render('night/create.html.twig', [
@@ -41,7 +41,7 @@ final class NightController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            return $this->redirectToRoute('show_dashboard', ['id' => $night->getDog()->getId()]);
+            return $this->redirectToRoute('show_calendar_day', ['id' => $night->getDog()?->getId()]);
         }
 
         return $this->render('night/create.html.twig', [
