@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block subTitle %}
-    {{ dog.crossings.count }} {{ 'today'|trans }}
+    {{ crossings.count|default }} {{ 'today'|trans }}
 {% endblock %}
 
 {% block icon %}
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    {% for crossing in dog.crossings %}
+    {% for crossing in crossings %}
         <div class="d-flex flex-row justify-content-between align-items-center px-3 py-2">
             <span>{{ crossing.location|trans }} - {{ crossing.freedomLevel|trans }}  ~{{ crossing.distance|trans }}m</span>
                 <span class="badge rounded-pill text-bg-warning py-2">

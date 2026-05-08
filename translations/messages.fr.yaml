@@ -14,6 +14,7 @@ end: Fin
 fill_up: Renseigner
 fill_up_night_of: Renseigner la nuit du %date%
 fill_up_today: À renseigner aujourd'hui
+last_night: Nuit dernière
 login: Connexion
 my_dogs: Mes chiens
 nights: Nuits

@@ -6,6 +6,7 @@ use App\Entity\Enum\FreedomLevel;
 use App\Entity\Enum\Location;
 use App\Entity\Enum\ReactionLevel;
 use App\Repository\CrossingRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -35,6 +36,9 @@ class Crossing
     #[ORM\ManyToOne(inversedBy: 'crossings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Dog $dog = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $date = null;
 
     public function getId(): ?int
     {
@@ -97,6 +101,18 @@ class Crossing
     public function setDog(?Dog $dog): static
     {
         $this->dog = $dog;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTime
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTime $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

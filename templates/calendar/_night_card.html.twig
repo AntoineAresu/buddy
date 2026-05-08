@@ -1,12 +1,12 @@
 {% extends 'calendar/day_card.html.twig' %}
 
 {% block title %}
-    {{ 'nights'|trans }}
+    {{ 'last_night'|trans }}
 {% endblock title %}
 
 {% block subTitle %}
-    {{ yesterdayNight
-    ? yesterdayNight.start|date('H:i')~' → '~yesterdayNight.end|date('H:i')
+    {{ night
+    ? night.start|date('H:i')~' → '~night.end|date('H:i')
     : 'fill_up_today'|trans }}
 {% endblock %}
 
@@ -15,9 +15,9 @@
 {% endblock %}
 
 {% block button %}
-    {% if yesterdayNight %}
-        <p>{{ 'duration'|trans }} : {{ yesterdayNight.durationInHours }}h</p>
-        <a href="{{ path('update_night', {id: yesterdayNight.id}) }}"
+    {% if night %}
+        <p>{{ 'duration'|trans }} : {{ night.durationInHours }}h</p>
+        <a href="{{ path('update_night', {id: night.id}) }}"
            class="btn btn-dark w-100 mt-auto"
         >
             <twig:ux:icon name="mdi:pencil" />

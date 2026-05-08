@@ -2,13 +2,10 @@
 {% block title %}{{ 'today'|trans }}{% endblock %}
 
 {% block body %}
-    {% set yesterday = date|date_modify('-1 day')|date('Y-m-d') %}
-    {% set yesterdayNight = dog.yesterdayNight %}
-
     <div class="row g-3 mb-4 justify-content-center">
-        <h3>{{ yesterday|date('d-m-Y') }}</h3>
-        {{ include('calendar/_night_card.html.twig') }}
-        {{ include('calendar/_crossings_card.html.twig') }}
+        <h3>{{ date|date('d-m-Y') }}</h3>
+        {{ include('calendar/_night_card.html.twig', {night}) }}
+        {{ include('calendar/_crossings_card.html.twig', {crossings}) }}
     </div>
 
 {% endblock %}
