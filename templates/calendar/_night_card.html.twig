@@ -1,0 +1,34 @@
+{% extends 'calendar/day_card.html.twig' %}
+
+{% block title %}
+    {{ 'nights'|trans }}
+{% endblock title %}
+
+{% block subTitle %}
+    {{ yesterdayNight
+    ? yesterdayNight.start|date('H:i')~' → '~yesterdayNight.end|date('H:i')
+    : 'fill_up_today'|trans }}
+{% endblock %}
+
+{% block icon %}
+    <twig:ux:icon name="mdi:moon-waxing-crescent" class="fs-3 text-dark"/>
+{% endblock %}
+
+{% block button %}
+    {% if yesterdayNight %}
+        <p>{{ 'duration'|trans }} : {{ yesterdayNight.durationInHours }}h</p>
+        <a href="{{ path('update_night', {id: yesterdayNight.id}) }}"
+           class="btn btn-dark w-100 mt-auto"
+        >
+            <twig:ux:icon name="mdi:pencil" />
+            {{ 'update'|trans }}
+        </a>
+    {% else %}
+        <a href="{{ path('create_night', {id: dog.id}) }}"
+           class="btn btn-dark w-100 mt-auto"
+        >
+            <twig:ux:icon name="mdi:plus" />
+            {{ 'fill_up'|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
