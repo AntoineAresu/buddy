@@ -6,7 +6,10 @@ import timeGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/timegrid@6.1.1
 import interaction from 'https://cdn.skypack.dev/@fullcalendar/interaction@6.1.15';
 
 export default class extends Controller {
-    static values = {nights: Array};
+    static values = {
+        nights: Array,
+        dayUrl: String,
+    };
     connect() {
         let calendar = new Calendar(this.element, {
             plugins: [dayGridPlugin, timeGridPlugin, interaction],
@@ -29,6 +32,9 @@ export default class extends Controller {
             editable: true,
             disableDragging: true,
             events: this.formatNightsEvents(this.nightsValue),
+            dateClick: (info) => {
+                window.location = this.dayUrlValue+'/'+info.dateStr;
+            }
         });
         calendar.render();
     }

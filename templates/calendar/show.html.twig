@@ -2,7 +2,10 @@
 {% block title %}{{ 'calendar'|trans }}{% endblock %}
 
 {% block body %}
-    <div {{ stimulus_controller('calendar', {nights: dog.nightsToArray}) }}>
+    <div {{ stimulus_controller('calendar', {
+        nights: dog.nightsToArray,
+        dayUrl: path('show_calendar_day', {id: dog.id})
+    }) }}>
 
     </div>
 {% endblock %}
