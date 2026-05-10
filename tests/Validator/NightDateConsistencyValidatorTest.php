@@ -65,7 +65,6 @@ class NightDateConsistencyValidatorTest extends ConstraintValidatorTestCase
             $violation = $this->buildViolation('night_duration_too_long')
                 ->setParameter('%hour%', Night::MAX_DURATION_HOURS);
 
-            var_dump($this->context->getViolations());
             $violation->assertRaised();
         } else {
             $this->assertNoViolation();

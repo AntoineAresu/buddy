@@ -4,9 +4,14 @@ import {Calendar} from 'https://cdn.skypack.dev/@fullcalendar/core@6.1.15';
 import dayGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/daygrid@6.1.15';
 import timeGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/timegrid@6.1.15';
 import interaction from 'https://cdn.skypack.dev/@fullcalendar/interaction@6.1.15';
+import CalendarHelper from "./helper/calendar/CalendarHelper.js";
 
 export default class extends Controller {
-    static values = {nights: Array};
+    static values = {
+        nights: Array,
+        crossings: Array,
+        dayUrl: String,
+    };
     connect() {
         let calendar = new Calendar(this.element, {
             plugins: [dayGridPlugin, timeGridPlugin, interaction],
@@ -28,23 +33,14 @@ export default class extends Controller {
             dayHeaderFormat: { weekday: 'long' },
             editable: true,
             disableDragging: true,
-            events: this.formatNightsEvents(this.nightsValue),
+            events: [
+                ...CalendarHelper.formatNightsEvents(this.nightsValue),
+                ...CalendarHelper.formatCrossingsEvents(this.crossingsValue)
+            ],
+            dateClick: (info) => {
+                window.location = this.dayUrlValue+'/'+info.dateStr;
+            }
         });
         calendar.render();
-    }
-
-    formatNightsEvents(nights) {
-        return nights.map(night => ({
-            start: night.end,
-            title: `🌙 Nuit du ${this.getDayOfMonth(night.start)} au ${this.getDayOfMonth(night.end)} : ${night.duration}h`,
-            allDay: true,
-            backgroundColor: '#B8CDE0',
-            borderColor: '#9BBFD4',
-            textColor: '#1e272e',
-        }));
-    }
-
-    getDayOfMonth(date) {
-        return new Date(date).getDate();
     }
 }

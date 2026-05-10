@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Crossing;
+use App\Entity\Dog;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,20 @@ class CrossingRepository extends ServiceEntityRepository
         parent::__construct($registry, Crossing::class);
     }
 
-    //    /**
-    //     * @return Crossing[] Returns an array of Crossing objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return array<int, Crossing>
+     */
+    public function findForDate(Dog $dog, \DateTime $date): array
+    {
+        /** @var array<int, Crossing> $result * */
+        $result = $this->createQueryBuilder('c')
+            ->andWhere('c.dog = :dog')
+            ->andWhere('c.date = :date')
+            ->setParameter('dog', $dog)
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
 
-    //    public function findOneBySomeField($value): ?Crossing
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $result;
+    }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Dog;
 use App\Entity\Night;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,28 +18,21 @@ class NightRepository extends ServiceEntityRepository
         parent::__construct($registry, Night::class);
     }
 
-    //    /**
-    //     * @return Night[] Returns an array of Night objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('n.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findLastNightForDate(Dog $dog, \DateTime $date): ?Night
+    {
+        try {
+            /** @var ?Night $result * */
+            $result = $this->createQueryBuilder('n')
+                ->andWhere('n.dog = :dog')
+                ->andWhere('DATE(n.end) = :date')
+                ->setParameter('dog', $dog)
+                ->setParameter('date', $date)
+                ->getQuery()
+                ->getOneOrNullResult();
 
-    //    public function findOneBySomeField($value): ?Night
-    //    {
-    //        return $this->createQueryBuilder('n')
-    //            ->andWhere('n.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+            return $result;
+        } catch (NonUniqueResultException) {
+            return null;
+        }
+    }
 }

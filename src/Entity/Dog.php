@@ -163,18 +163,6 @@ class Dog
             : round($this->getTotalSleepInHours() / $this->nights->count(), 1);
     }
 
-    /**
-     * @return array<int, array<string, float|string|null>>
-     */
-    public function getNightsToArray(): array
-    {
-        return $this->nights->map(fn (Night $night) => [
-            'start' => $night->getStart()?->format('Y-m-d H:i:s'),
-            'duration' => $night->getDurationInHours(),
-            'end' => $night->getEnd()?->format('Y-m-d H:i:s'),
-        ])->toArray();
-    }
-
     public function getYesterdayNight(): ?Night
     {
         $yesterday = new \DateTime('yesterday');

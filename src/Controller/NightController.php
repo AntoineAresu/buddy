@@ -24,7 +24,24 @@ final class NightController extends AbstractController
             $em->persist($night);
             $em->flush();
 
-            return $this->redirectToRoute('show_dashboard', ['id' => $dog->getId()]);
+            return $this->redirectToRoute('show_calendar_day', ['id' => $dog->getId()]);
+        }
+
+        return $this->render('night/create.html.twig', [
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/night/{id<\d+>}/update', name: 'update_night')]
+    #[IsGranted('UPDATE', 'night')]
+    public function update(Request $request, Night $night, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(NightType::class, $night)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('show_calendar_day', ['id' => $night->getDog()?->getId()]);
         }
 
         return $this->render('night/create.html.twig', [

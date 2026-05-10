@@ -1,3 +1,6 @@
+Street: Rue
+Mild: Faible
+LongLine: Longe
 add_dog: Ajouter un chien
 app_name: BuddyApp
 average_sleep: Moy. sommeil
@@ -9,7 +12,9 @@ duration: Durée
 email: Email
 end: Fin
 fill_up: Renseigner
+fill_up_night_of: Renseigner la nuit du %date%
 fill_up_today: À renseigner aujourd'hui
+last_night: Nuit dernière
 login: Connexion
 my_dogs: Mes chiens
 nights: Nuits
@@ -17,5 +22,8 @@ night_of: Nuit du
 password: Mot de passe
 start: Début
 statistics: Statistiques
+street: Rue
 submit: Valider
+today: Aujourd'hui
 update: Modifier
+update_night_of: Modifier la nuit du %date%
