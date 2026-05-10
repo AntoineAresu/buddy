@@ -3,9 +3,16 @@
 
 {% block body %}
     <div class="row g-3 mb-4 justify-content-center">
-        <h3>{{ date|date('d-m-Y') }}</h3>
+        {{ include('calendar/_day_navigation.html.twig', {dog, date}) }}
+
+        <div class="d-flex justify-content-center mb-3">
+            <a href="{{ path('show_calendar', {id: dog.id}) }}"
+               class="btn btn-dark btn ms-2">
+                <twig:ux:icon name="mdi:calendar" class="fs-3"/>
+            </a>
+        </div>
+
         {{ include('calendar/_night_card.html.twig', {night}) }}
         {{ include('calendar/_crossings_card.html.twig', {crossings}) }}
     </div>
-
 {% endblock %}

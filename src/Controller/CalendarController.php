@@ -25,15 +25,19 @@ final class CalendarController extends AbstractController
 
     #[Route('/dog/{id<\d+>}/calendar/day/{date<\d{4}-\d{2}-\d{2}>}', name: 'show_calendar_day', defaults: ['date' => null])]
     #[IsGranted('UPDATE', 'dog')]
-    public function today(Dog $dog, ?\DateTime $date, NightRepository $nightRepository, CrossingRepository $crossingRepository): Response
+    public function day(Dog $dog, ?\DateTime $date, NightRepository $nightRepository, CrossingRepository $crossingRepository): Response
     {
         $date = $date ?? new \DateTime()->setTime(0, 0);
+        $dateMinusOneDay = (clone $date)->sub(new \DateInterval('P1D'));
+        $datePlusOneDay = (clone $date)->add(new \DateInterval('P1D'));
 
         return $this->render('calendar/day.html.twig', [
             'dog' => $dog,
             'night' => $nightRepository->findLastNightForDate($dog, $date),
             'crossings' => $crossingRepository->findForDate($dog, $date),
             'date' => $date,
+            'datePlusOneDay' => $datePlusOneDay,
+            'dateMinusOneDay' => $dateMinusOneDay,
         ]);
     }
 }
