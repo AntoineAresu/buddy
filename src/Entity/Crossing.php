@@ -38,7 +38,7 @@ class Crossing
     private ?Dog $dog = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $date = null;
+    private \DateTime $date;
 
     public function getId(): ?int
     {
@@ -105,7 +105,7 @@ class Crossing
         return $this;
     }
 
-    public function getDate(): ?\DateTime
+    public function getDate(): \DateTime
     {
         return $this->date;
     }

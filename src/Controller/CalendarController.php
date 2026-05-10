@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Domain\Calendar\CalendarDataFormatter;
 use App\Entity\Dog;
 use App\Repository\CrossingRepository;
 use App\Repository\NightRepository;
@@ -13,10 +14,12 @@ final class CalendarController extends AbstractController
 {
     #[Route('/dog/{id<\d+>}/calendar', name: 'show_calendar')]
     #[IsGranted('UPDATE', 'dog')]
-    public function calendar(Dog $dog): Response
+    public function calendar(Dog $dog, CalendarDataFormatter $formatter): Response
     {
         return $this->render('calendar/show.html.twig', [
             'dog' => $dog,
+            'nights' => $formatter->getNightsCalendarData($dog),
+            'crossings' => $formatter->getCrossingsCalendarData($dog),
         ]);
     }
 

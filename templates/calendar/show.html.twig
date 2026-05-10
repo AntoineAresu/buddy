@@ -3,7 +3,8 @@
 
 {% block body %}
     <div {{ stimulus_controller('calendar', {
-        nights: dog.nightsToArray,
+        nights: nights,
+        crossings: crossings,
         dayUrl: path('show_calendar_day', {id: dog.id})
     }) }}>
 
