@@ -17,7 +17,7 @@ final class CrossingController extends AbstractController
     #[IsGranted('UPDATE', 'dog')]
     public function create(Request $request, Dog $dog, ?\DateTime $date, EntityManagerInterface $em): Response
     {
-        $crossing = new Crossing()->setDog($dog)->setDate($date);
+        $crossing = new Crossing()->setDog($dog)->setDate($date ?? new \DateTime());
         $form = $this->createForm(CrossingType::class, $crossing)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -26,7 +26,7 @@ final class CrossingController extends AbstractController
 
             return $this->redirectToRoute('show_calendar_day', [
                 'id' => $dog->getId(),
-                'date' => $date->format('Y-m-d'),
+                'date' => $date?->format('Y-m-d'),
             ]);
         }
 

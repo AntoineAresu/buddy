@@ -1,6 +1,10 @@
-Street: Rue
-Mild: Faible
+Free: Libre
+Indoor: Intérieur
+Leash: Laisse
 LongLine: Longe
+Mild: Faible
+Park: Parc
+Street: Rue
 add_dog: Ajouter un chien
 app_name: BuddyApp
 average_sleep: Moy. sommeil
@@ -8,18 +12,23 @@ birth_at: Né le
 calendar: Calendrier
 crossings: Croisements
 dashboard: Tableau de bord
+distance_m: Distance (m)
 duration: Durée
 email: Email
 end: Fin
 fill_up: Renseigner
 fill_up_night_of: Renseigner la nuit du %date%
 fill_up_today: À renseigner aujourd'hui
+freedom: Liberté
 last_night: Nuit dernière
+location: Lieu
 login: Connexion
 my_dogs: Mes chiens
 nights: Nuits
 night_of: Nuit du
+no_reaction: Pas de réaction
 password: Mot de passe
+reaction: Réaction
 start: Début
 statistics: Statistiques
 street: Rue

@@ -30,7 +30,6 @@ class Crossing
     private ?FreedomLevel $freedomLevel = null;
 
     #[ORM\Column(nullable: true, enumType: ReactionLevel::class)]
-    #[Assert\NotBlank]
     private ?ReactionLevel $reaction = null;
 
     #[ORM\ManyToOne(inversedBy: 'crossings')]

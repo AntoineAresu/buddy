@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block button %}
-    <a href="#"
+    <a href="{{ path('create_crossing', {id: dog.id, date: date|date('Y-m-d')}) }}"
        class="btn btn-dark w-100 mt-2"
     >
         <twig:ux:icon name="mdi:plus"/>

@@ -13,6 +13,6 @@
         </div>
 
         {{ include('calendar/_night_card.html.twig', {night}) }}
-        {{ include('calendar/_crossings_card.html.twig', {crossings}) }}
+        {{ include('calendar/_crossings_card.html.twig', {crossings, date}) }}
     </div>
 {% endblock %}
