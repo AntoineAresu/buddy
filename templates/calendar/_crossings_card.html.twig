@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block subTitle %}
-    {{ crossings.count|default }} {{ 'today'|trans }}
+    {{ crossings|length }} {{ date|date_ymd == 'now'|date('Y-m-d') ? 'today'|trans : '' }}
 {% endblock %}
 
 {% block icon %}
@@ -16,18 +16,21 @@
     {% for crossing in crossings %}
         <div class="d-flex flex-row justify-content-between align-items-center px-3 py-2">
             <span>{{ crossing.location|trans }} - {{ crossing.freedomLevel|trans }}  ~{{ crossing.distance|trans }}m</span>
-                <span class="badge rounded-pill text-bg-warning py-2">
-                    Reaction {{ crossing.reaction|trans }}
-                </span>
-                <a class="btn btn-sm border-dark text-dark" href="#">
-                    <twig:ux:icon name="mdi:pencil" class="fs-6"/>
-                </a>
+            {% set hasReacted = crossing.reaction %}
+            <span class="badge rounded-pill bg-{{ hasReacted ? 'warning' : 'success' }} py-2">
+                {{ hasReacted
+                ? 'reaction'|trans~' '~crossing.reaction|trans
+                : 'no_reaction'|trans }}
+            </span>
+            <a class="btn btn-sm border-dark text-dark" href="#">
+                <twig:ux:icon name="mdi:pencil" class="fs-6"/>
+            </a>
         </div>
     {% endfor %}
 {% endblock %}
 
 {% block button %}
-    <a href="#"
+    <a href="{{ path('create_crossing', {id: dog.id, date: date|date_ymd}) }}"
        class="btn btn-dark w-100 mt-2"
     >
         <twig:ux:icon name="mdi:plus"/>

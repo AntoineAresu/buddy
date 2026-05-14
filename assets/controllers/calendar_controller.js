@@ -38,7 +38,7 @@ export default class extends Controller {
                 ...CalendarHelper.formatCrossingsEvents(this.crossingsValue)
             ],
             dateClick: (info) => {
-                window.location = this.dayUrlValue+'/'+info.dateStr;
+                window.location = this.dayUrlValue+'?date='+info.dateStr;
             }
         });
         calendar.render();

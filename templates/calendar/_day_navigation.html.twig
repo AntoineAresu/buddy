@@ -1,0 +1,11 @@
+<div class="d-flex align-items-center justify-content-center">
+    <a class="btn btn-outline-dark"
+       href="{{ path('show_calendar_day', {id: dog.id, date: previous_day(date)|date_ymd}) }}">
+        <twig:ux:icon name="mdi:chevron-left"  class="fs-4"/>
+    </a>
+    <div class="mx-3">{{ date|date('d M Y') }}</div>
+    <a class="btn btn-outline-dark"
+       href="{{ path('show_calendar_day', {id: dog.id, date: next_day(date)|date_ymd}) }}">
+        <twig:ux:icon name="mdi:chevron-right" class="fs-4"/>
+    </a>
+</div>

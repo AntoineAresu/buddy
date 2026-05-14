@@ -25,13 +25,9 @@ class NightDateConsistencyValidatorTest extends ConstraintValidatorTestCase
         \DateTime $newNightStart,
         \DateTime $newNightEnd,
     ): void {
-        $dog = new Dog()->addNight(new Night()
-            ->setStart($existingNightStart)
-            ->setEnd($existingNightEnd));
+        $dog = new Dog()->addNight(new Night($existingNightStart));
 
-        $newNight = new Night()
-            ->setStart($newNightStart)
-            ->setEnd($newNightEnd);
+        $newNight = new Night($newNightStart);
 
         $dog->addNight($newNight);
 
@@ -55,9 +51,7 @@ class NightDateConsistencyValidatorTest extends ConstraintValidatorTestCase
     #[DataProvider('provideTestNightDuration')]
     public function testNightDuration(bool $shouldRaiseViolation, \DateTime $start, \DateTime $end): void
     {
-        $night = new Night()
-            ->setStart($start)
-            ->setEnd($end);
+        $night = new Night($start)->setStart($start)->setEnd($end);
 
         $this->validator->validate($night, new NightDateConsistency());
 

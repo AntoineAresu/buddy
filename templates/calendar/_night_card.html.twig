@@ -17,14 +17,14 @@
 {% block button %}
     {% if night %}
         <p>{{ 'duration'|trans }} : {{ night.durationInHours }}h</p>
-        <a href="{{ path('update_night', {id: night.id}) }}"
+        <a href="{{ path('update_night', {id: night.id, date: date|date_ymd}) }}"
            class="btn btn-dark w-100 mt-auto"
         >
             <twig:ux:icon name="mdi:pencil" />
             {{ 'update'|trans }}
         </a>
     {% else %}
-        <a href="{{ path('create_night', {id: dog.id}) }}"
+        <a href="{{ path('create_night', {id: dog.id, date: previous_day(date)|date_ymd}) }}"
            class="btn btn-dark w-100 mt-auto"
         >
             <twig:ux:icon name="mdi:plus" />

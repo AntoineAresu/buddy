@@ -12,10 +12,10 @@ export default class extends Controller {
     connect() {
         flatpickr(this.element, {
             enableTime: this.enableTimeValue,
-            noCalendar: true,
-            dateFormat: "Y-m-d H:i",
+            noCalendar: !!this.enableTimeValue,
+            dateFormat: 'Y-m-d H:i',
             altInput: true,
-            altFormat: "H:i",
+            altFormat: this.enableTimeValue ? 'H:i' : 'd/m/Y',
             locale: French,
             defaultDate: this.defaultDateValue,
         });
