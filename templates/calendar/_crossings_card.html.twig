@@ -17,7 +17,7 @@
         <div class="d-flex flex-row justify-content-between align-items-center px-3 py-2">
             <span>{{ crossing.location|trans }} - {{ crossing.freedomLevel|trans }}  ~{{ crossing.distance|trans }}m</span>
             {% set hasReacted = crossing.reaction %}
-            <span class="badge rounded-pill bg-{{ hasReacted ? 'warning' : 'success' }} py-2">
+            <span class="badge rounded-pill bg-{{ get_reaction_color(crossing.reaction) }} py-2">
                 {{ hasReacted
                 ? 'reaction'|trans~' '~crossing.reaction|trans
                 : 'no_reaction'|trans }}

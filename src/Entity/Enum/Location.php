@@ -13,6 +13,6 @@ enum Location: string implements TranslatableInterface
 
     public function trans(TranslatorInterface $translator, ?string $locale = null): string
     {
-        return $translator->trans($this->name, locale: $locale);
+        return $translator->trans(strtolower($this->name), locale: $locale);
     }
 }

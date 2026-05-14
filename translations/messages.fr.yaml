@@ -1,10 +1,3 @@
-Free: Libre
-Indoor: Intérieur
-Leash: Laisse
-LongLine: Longe
-Mild: Faible
-Park: Parc
-Street: Rue
 add_dog: Ajouter un chien
 app_name: BuddyApp
 average_sleep: Moy. sommeil
@@ -19,14 +12,22 @@ end: Fin
 fill_up: Renseigner
 fill_up_night_of: Renseigner la nuit du %date%
 fill_up_today: À renseigner aujourd'hui
+free: Libre
 freedom: Liberté
+high: Forte
+indoor: Intérieur
 last_night: Nuit dernière
+leash: Laisse
 location: Lieu
 login: Connexion
+longline: Longe
+mild: Faible
+moderate: Moyenne
 my_dogs: Mes chiens
 nights: Nuits
 night_of: Nuit du
 no_reaction: Pas de réaction
+park: Parc
 password: Mot de passe
 reaction: Réaction
 start: Début
