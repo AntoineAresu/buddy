@@ -23,7 +23,7 @@ final class NightController extends AbstractController
         EntityManagerInterface $em,
     ): Response {
         $date = $this->getDateFromQuery($date);
-        $night = new Night()->setDog($dog)->setStart($date);
+        $night = new Night()->setDog($dog)->setStart($date->setTime(22, 0));
         $form = $this->createForm(NightType::class, $night)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -5,7 +5,7 @@
 {% endblock title %}
 
 {% block subTitle %}
-    {{ crossings|length }} {{ date|date('Y-m-d') == 'now'|date('Y-m-d') ? 'today'|trans : '' }}
+    {{ crossings|length }} {{ date|date_ymd == 'now'|date('Y-m-d') ? 'today'|trans : '' }}
 {% endblock %}
 
 {% block icon %}
@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block button %}
-    <a href="{{ path('create_crossing', {id: dog.id, date: date|date('Y-m-d')}) }}"
+    <a href="{{ path('create_crossing', {id: dog.id, date: date|date_ymd}) }}"
        class="btn btn-dark w-100 mt-2"
     >
         <twig:ux:icon name="mdi:plus"/>

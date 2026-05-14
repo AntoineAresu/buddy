@@ -33,16 +33,12 @@ final class CalendarController extends AbstractController
         CrossingRepository $crossingRepository,
     ): Response {
         $date = $this->getDateFromQuery($date);
-        $dateMinusOneDay = (clone $date)->sub(new \DateInterval('P1D'));
-        $datePlusOneDay = (clone $date)->add(new \DateInterval('P1D'));
 
         return $this->render('calendar/day.html.twig', [
             'dog' => $dog,
             'night' => $nightRepository->findLastNightForDate($dog, $date),
             'crossings' => $crossingRepository->findForDate($dog, $date),
             'date' => $date,
-            'datePlusOneDay' => $datePlusOneDay,
-            'dateMinusOneDay' => $dateMinusOneDay,
         ]);
     }
 }

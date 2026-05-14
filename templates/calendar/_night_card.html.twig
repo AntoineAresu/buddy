@@ -24,7 +24,7 @@
             {{ 'update'|trans }}
         </a>
     {% else %}
-        <a href="{{ path('create_night', {id: dog.id}) }}"
+        <a href="{{ path('create_night', {id: dog.id, date: previous_day(date)|date_ymd}) }}"
            class="btn btn-dark w-100 mt-auto"
         >
             <twig:ux:icon name="mdi:plus" />
