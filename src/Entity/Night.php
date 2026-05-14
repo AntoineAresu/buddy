@@ -31,10 +31,10 @@ class Night
     #[ORM\JoinColumn(nullable: false)]
     private ?Dog $dog = null;
 
-    public function __construct()
+    public function __construct(\DateTime $date)
     {
-        $this->start = new \DateTime('yesterday')->setTime(22, 0);
-        $this->end = new \DateTime('today')->setTime(8, 0);
+        $this->start = (clone $date)->setTime(22, 0);
+        $this->end = (clone $date)->modify('+1 day')->setTime(8, 00);
     }
 
     public function getId(): ?int

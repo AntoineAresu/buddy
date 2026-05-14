@@ -23,35 +23,48 @@ final class NightController extends AbstractController
         EntityManagerInterface $em,
     ): Response {
         $date = $this->getDateFromQuery($date);
-        $night = new Night()->setDog($dog)->setStart($date->setTime(22, 0));
+        $night = new Night($date)->setDog($dog);
         $form = $this->createForm(NightType::class, $night)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($night);
             $em->flush();
 
-            return $this->redirectToRoute('show_calendar_day', ['id' => $dog->getId()]);
+            return $this->redirectToRoute('show_calendar_day', [
+                'id' => $dog->getId(),
+                'date' => $date->format('Y-m-d'),
+            ]);
         }
 
         return $this->render('night/create.html.twig', [
             'form' => $form,
+            'date' => $date,
         ]);
     }
 
     #[Route('/night/{id<\d+>}/update', name: 'update_night')]
     #[IsGranted('UPDATE', 'night')]
-    public function update(Request $request, Night $night, EntityManagerInterface $em): Response
-    {
+    public function update(
+        Request $request,
+        Night $night,
+        #[MapQueryParameter] string $date,
+        EntityManagerInterface $em,
+    ): Response {
+        $date = $this->getDateFromQuery($date);
         $form = $this->createForm(NightType::class, $night)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
-            return $this->redirectToRoute('show_calendar_day', ['id' => $night->getDog()?->getId()]);
+            return $this->redirectToRoute('show_calendar_day', [
+                'id' => $night->getDog()?->getId(),
+                'date' => $date->format('Y-m-d'),
+            ]);
         }
 
         return $this->render('night/create.html.twig', [
             'form' => $form,
+            'date' => $date,
         ]);
     }
 }
