@@ -36,4 +36,8 @@ export default class CalendarHelper {
     static getDayOfMonth(date) {
         return new Date(date).getDate();
     }
+
+    static getDateToString(date) {
+        return new Intl.DateTimeFormat('sv-SE').format(date);
+    }
 }
