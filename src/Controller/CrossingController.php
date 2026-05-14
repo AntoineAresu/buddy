@@ -37,7 +37,7 @@ final class CrossingController extends AbstractController
             ]);
         }
 
-        return $this->render('crossing/index.html.twig', [
+        return $this->render('crossing/create.html.twig', [
             'dog' => $dog,
             'form' => $form,
         ]);
