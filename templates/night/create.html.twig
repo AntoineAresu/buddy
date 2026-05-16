@@ -1,7 +1,7 @@
 {% extends 'night/index.html.twig' %}
 
 {% block body %}
-    {{ include('night/_form.html.twig', {
+    {{ include('components/form/_form.html.twig', {
         form,
         title: 'fill_up_night_of'|trans({'%date%': date|date('d/m/Y')}) })
     }}
