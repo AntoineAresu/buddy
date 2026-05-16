@@ -1,0 +1,28 @@
+{% extends 'calendar/day_card.html.twig' %}
+
+{% block title %}
+    {{ 'OCDs'|trans }}
+{% endblock title %}
+
+{% block subTitle %}
+    {{ ocds|length }}
+{% endblock %}
+
+{% block icon %}
+    <twig:ux:icon name="mdi:medical-bag" class="fs-3 text-dark"/>
+{% endblock %}
+
+{% block content %}
+    {% for ocd in ocds %}
+        <p><b>{{ ocd.date|date('H\\hi') }}</b> - {{ ocd.duration }}s - {{ ocd.note }}</p>
+    {% endfor %}
+{% endblock %}
+
+{% block button %}
+    <a href="#"
+       class="btn btn-dark w-100 mt-auto"
+    >
+        <twig:ux:icon name="mdi:plus"/>
+        {{ 'add'|trans }}
+    </a>
+{% endblock %}

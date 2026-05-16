@@ -40,10 +40,17 @@ class Dog
     #[ORM\OneToMany(targetEntity: Crossing::class, mappedBy: 'dog', orphanRemoval: true)]
     private Collection $crossings;
 
+    /**
+     * @var Collection<int, OCD>
+     */
+    #[ORM\OneToMany(targetEntity: OCD::class, mappedBy: 'dog', orphanRemoval: true)]
+    private Collection $oCDs;
+
     public function __construct()
     {
         $this->nights = new ArrayCollection();
         $this->crossings = new ArrayCollection();
+        $this->oCDs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,5 +181,35 @@ class Dog
         }
 
         return null;
+    }
+
+    /**
+     * @return Collection<int, OCD>
+     */
+    public function getOCDs(): Collection
+    {
+        return $this->oCDs;
+    }
+
+    public function addOCD(OCD $oCD): static
+    {
+        if (!$this->oCDs->contains($oCD)) {
+            $this->oCDs->add($oCD);
+            $oCD->setDog($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOCD(OCD $oCD): static
+    {
+        if ($this->oCDs->removeElement($oCD)) {
+            // set the owning side to null (unless already changed)
+            if ($oCD->getDog() === $this) {
+                $oCD->setDog(null);
+            }
+        }
+
+        return $this;
     }
 }

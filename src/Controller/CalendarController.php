@@ -6,6 +6,7 @@ use App\Domain\Calendar\CalendarDataFormatter;
 use App\Entity\Dog;
 use App\Repository\CrossingRepository;
 use App\Repository\NightRepository;
+use App\Repository\OCDRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapQueryParameter;
 use Symfony\Component\Routing\Attribute\Route;
@@ -31,6 +32,7 @@ final class CalendarController extends AbstractController
         #[MapQueryParameter] string $date,
         NightRepository $nightRepository,
         CrossingRepository $crossingRepository,
+        OCDRepository $OCDRepository,
     ): Response {
         $date = $this->getDateFromQuery($date);
 
@@ -38,6 +40,7 @@ final class CalendarController extends AbstractController
             'dog' => $dog,
             'night' => $nightRepository->findLastNightForDate($dog, $date),
             'crossings' => $crossingRepository->findForDate($dog, $date),
+            'ocds' => $OCDRepository->findForDate($dog, $date),
             'date' => $date,
         ]);
     }
