@@ -1,8 +1,6 @@
 services:
   php:
     build: .
-    volumes:
-      - .:/var/www/html
     env_file:
       - .env.local
     depends_on:

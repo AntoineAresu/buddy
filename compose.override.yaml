@@ -1,5 +1,8 @@
 
 services:
+  php:
+    volumes:
+      - .:/var/www/html
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit
